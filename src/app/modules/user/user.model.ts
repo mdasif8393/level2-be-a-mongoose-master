@@ -1,8 +1,12 @@
-import { Schema, model } from "mongoose";
-import { IUser } from "./user.interface";
+import { Model, Schema, model } from "mongoose";
+import { IUser, IUserMethods, UserModel } from "./user.interface";
+
+//custom instance method
+// type UserModel = Model<IUser, {}, IUserMethods>
 
 //2. Creating schema using interface
-const userSchema = new Schema<IUser>({
+//custom instance method
+const userSchema = new Schema<IUser, UserModel, IUserMethods>({
     id: {type: String, required: true, unique: true},
     role: {type: String, required: true},
     password: {type: String, required: true},
@@ -29,7 +33,22 @@ const userSchema = new Schema<IUser>({
 
 });
 
+//custom instance method
+userSchema.method('fullName', function fullName(){
+    return this.name.firstName + ' ' + this.name.lastName;
+});
+
+//static 2
+userSchema.static('getAdminUsers', async function getAdminUsers() {
+    const admins = await this.find({role: 'admin'});
+    return admins;
+});
+
 //3. create model
-const User = model<IUser>('User', userSchema);
+//custom instance method
+const User = model<IUser, UserModel>('User', userSchema);
 
 export default User;
+
+//instance methods --> instance  er method
+//class -> instance methods -> instance methods
