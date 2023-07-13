@@ -21,7 +21,7 @@ const userSchema = new Schema<IUser>({
     },
     dateOfBirth: {type: String},
     gender: {type: String, enum: ['male', 'female']},
-    email: {type: String},
+    email: {type: String, required: true},
     contactNo: {type: String, required: true},
     emergencyContactNo: {type: String, required: true},
     presentAddress: {type: String, required: true},
