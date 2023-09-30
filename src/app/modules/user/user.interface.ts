@@ -21,7 +21,7 @@ export interface IUser{
 };
 
 
-//custom instance method
+//custom instance method 1
 export interface IUserMethods {
     fullName(): string;
 };

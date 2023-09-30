@@ -33,7 +33,7 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>({
 
 });
 
-//custom instance method
+//custom instance method 2
 userSchema.method('fullName', function fullName(){
     return this.name.firstName + ' ' + this.name.lastName;
 });
